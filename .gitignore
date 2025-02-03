@@ -102,3 +102,9 @@ ENV/
 
 # jupyter trash
 .Trash-999/*
+
+# searxng
+searxng-docker.service
+caddy
+srv
+searxng/data/uwsgi.ini
