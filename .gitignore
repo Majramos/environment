@@ -108,3 +108,9 @@ searxng-docker.service
 caddy
 srv
 searxng/data/uwsgi.ini
+
+# stirling-pdf
+containers/stirling-pdf/data/extraConfigs/*
+containers/stirling-pdf/data/trainingData/*
+!containers/stirling-pdf/data/extraConfigs/.gitkeep
+!containers/stirling-pdf/data/trainingData/.gitkeep
