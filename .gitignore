@@ -114,3 +114,9 @@ containers/stirling-pdf/data/extraConfigs/*
 containers/stirling-pdf/data/trainingData/*
 !containers/stirling-pdf/data/extraConfigs/.gitkeep
 !containers/stirling-pdf/data/trainingData/.gitkeep
+
+# tasks.md
+containers/tasks.md/data/config/*
+containers/tasks.md/data/tasks/*
+!containers/tasks.md/data/config/.gitkeep
+!containers/tasks.md/data/tasks/.gitkeep
