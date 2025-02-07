@@ -1,0 +1,35 @@
+name: linkwarden
+services:
+    linkwarden-postgres:
+        image: postgres:16-alpine
+        container_name: linkwarden-postgres
+        env_file: .env
+        restart: unless-stopped
+        volumes:
+            - ./data/pgdata:/var/lib/postgresql/data
+        networks:
+            - linkwarden_network
+    
+    linkwarden:
+        image: ghcr.io/linkwarden/linkwarden:latest
+        container_name: linkwarden
+        env_file: .env
+        environment:
+            - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@linkwarden-postgres:5432/${POSTGRES_DB}
+            - NEXT_PUBLIC_DISABLE_REGISTRATION=true
+            - NEXT_PUBLIC_CREDENTIALS_ENABLED=true
+            - DISABLE_NEW_SSO_USERS=true
+        restart: unless-stopped
+        ports:
+            - 1009:3000
+        volumes:
+            - ./data/lkdata:/data/data
+        depends_on:
+            - linkwarden-postgres
+        networks:
+            - linkwarden_network
+
+networks: 
+    linkwarden_network:
+        name: linkwarden_network
+        driver: bridge
