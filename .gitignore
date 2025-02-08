@@ -126,3 +126,7 @@ containers/linkwarden/data/lkdata/*
 containers/linkwarden/data/pgdata/*
 !containers/linkwarden/data/lkdata/.gitkeep
 !containers/linkwarden/data/pgdata/.gitkeep
+
+# portainer
+containers/portainer/data/*
+!containers/portainer/data/.gitkeep
