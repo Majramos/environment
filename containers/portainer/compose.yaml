@@ -1,0 +1,21 @@
+name: portainer
+services:
+    portainer:
+        image: portainer/portainer-ce:2.21.4
+        container_name: portainer
+        command: -H unix:///var/run/docker.sock --base-url="/portainer" --http-enabled
+        volumes:
+            - ./data:/data
+            - /var/run/docker.sock:/var/run/docker.sock
+        restart: unless-stopped
+        ports:
+            # keep a port exposed for debuging
+            - ${PORTAINER_HTTP_PORT}:9000 # use http
+            # - ${PORTAINER_HTTPS_PORT}:9443 # use https
+            # - 8000:8000
+        networks:
+            - reverse_proxy
+
+networks:
+    reverse_proxy:
+        external: true
