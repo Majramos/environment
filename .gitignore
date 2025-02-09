@@ -130,3 +130,7 @@ containers/linkwarden/data/pgdata/*
 # portainer
 containers/portainer/data/*
 !containers/portainer/data/.gitkeep
+
+# uptime
+containers/uptime/data/*
+!containers/uptime/data/.gitkeep
