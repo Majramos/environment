@@ -107,7 +107,8 @@ ENV/
 searxng-docker.service
 caddy
 srv
-searxng/data/uwsgi.ini
+containers/searxng/data/uwsgi.ini
+containers/searxng/data/settings.yml
 
 # stirling-pdf
 containers/stirling-pdf/data/extraConfigs/*
