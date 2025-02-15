@@ -1,0 +1,20 @@
+name: homepage
+services:          
+    homepage:
+        image: ghcr.io/gethomepage/homepage:latest
+        container_name: homepage
+        # ports:
+            # - ${HOMEPAGE_HTTP_PORT}:3000
+        volumes:
+            - ./data:/app/config
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+        networks:
+            - reverse_proxy
+        environment:
+            - HOMEPAGE_VAR_TITLE=${HOMEPAGE_VAR_TITLE}
+            - HOMEPAGE_VAR_PIHOLE_KEY=${HOMEPAGE_VAR_PIHOLE_KEY}
+            - HOMEPAGE_VAR_LAB_URL=${HOMEPAGE_VAR_LAB_URL}
+
+networks:
+    reverse_proxy:
+        external: true
