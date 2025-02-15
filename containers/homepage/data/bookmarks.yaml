@@ -1,0 +1,28 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/bookmarks
+
+- Developer:
+    - Github:
+        - icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/github-light.png
+          href: https://github.com/
+    - Gitlab:
+        - icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/gitlab.png
+          href: https://gitlab.com/
+    - Leetcode:
+        - icon: si-leetcode-#FFA116
+          href: https://leetcode.com/
+
+
+- Social:
+    - Daily.dev:
+        - icon: si-dailydotdev-#CE3DF3
+          href: https://app.daily.dev/
+    - Reddit:
+        - icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/reddit.png
+          href: https://reddit.com/
+
+- Entertainment:
+    - YouTube:
+        - icon: sh-youtube
+          href: https://youtube.com/
