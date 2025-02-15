@@ -5,7 +5,7 @@
 
 - greeting:
     text_size: xl
-    text: Local Lab
+    text: {{HOMEPAGE_VAR_TITLE}}
 
 - resources:
     cpu: true
