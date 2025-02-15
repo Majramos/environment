@@ -1,0 +1,51 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/services
+
+- Containers:
+    - Portainer:
+        icon: portainer.png
+        href: {{HOMEPAGE_VAR_LAB_URL}}/portainer/
+        server: my-docker
+        container: portainer
+    - Caddy:
+        icon: caddy.png
+        server: my-docker
+        container: caddy
+        # widget: # require update to 0.92
+            # type: caddy
+            # url: {{HOMEPAGE_VAR_LAB_URL}}:2020/
+    - IT-Tools:
+        icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/it-tools.png
+        href: {{HOMEPAGE_VAR_LAB_URL}}/it-tools/
+        server: my-docker
+        container: it-tools
+    - Tasks.md:
+        icon: mdi-language-markdown
+        href: {{HOMEPAGE_VAR_LAB_URL}}/tasks/
+        server: my-docker
+        container: tasks.md
+    - Stirling PDF:
+        icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/stirling-pdf.png
+        href: {{HOMEPAGE_VAR_LAB_URL}}:1005/
+        server: my-docker
+        container: stirling-pdf
+
+
+- Utilities:
+    - Pi-hole:
+        icon: pi-hole.png
+        href: http://pi.hole/
+        widget:
+            type: pihole
+            url: http://pi.hole/
+            version: 5 # required if running v6 or higher, defaults to 5
+            key: {{HOMEPAGE_VAR_PIHOLE_KEY}}
+            fields: ["queries", "blocked", "blocked_percent", "gravity"]
+
+- Tasks:
+    - Tasks:
+        widget:
+            type: iframe
+            name: tasks
+            src: {{HOMEPAGE_VAR_LAB_URL}}/tasks/
