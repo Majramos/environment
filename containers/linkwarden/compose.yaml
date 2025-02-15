@@ -21,7 +21,7 @@ services:
             - DISABLE_NEW_SSO_USERS=true
         restart: unless-stopped
         ports:
-            - 1009:3000
+            - ${PORTAINER_HTTP_PORT}:3000
         volumes:
             - ./data/lkdata:/data/data
         depends_on:
