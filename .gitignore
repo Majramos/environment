@@ -135,3 +135,7 @@ containers/portainer/data/*
 # uptime
 containers/uptime/data/*
 !containers/uptime/data/.gitkeep
+
+# actualbudget
+containers/actualbudget/data/*
+!containers/actualbudget/data/.gitkeep
