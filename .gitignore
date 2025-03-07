@@ -105,7 +105,6 @@ ENV/
 
 # searxng
 searxng-docker.service
-caddy
 srv
 containers/searxng/data/uwsgi.ini
 containers/searxng/data/settings.yml
