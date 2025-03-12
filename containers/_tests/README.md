@@ -2,7 +2,7 @@
 
 ## Services
 
-### Vikunja 
+### Vikunja
 project management
 
 Site:
@@ -12,7 +12,7 @@ Documentation on docker instalation:
 - https://vikunja.io/docs/docker-walkthrough
 
 ```bash
-$ docker compose -f .\vikunja\compose.yaml up -d
+$ docker compose -f ./vikunja/compose.yaml up -d
 ```
 
 
@@ -26,7 +26,7 @@ Documentation on docker instalation:
 - https://readeck.org/en/docs/compose
 
 ```bash
-$ docker compose -f .\readeck\compose.yaml up -d
+$ docker compose -f ./readeck/compose.yaml up -d
 ```
 
 
@@ -40,5 +40,5 @@ Documentation on docker instalation:
 - https://doc.traefik.io/traefik/
 
 ```bash
-$ docker compose -f .\traefik\compose.yaml up -d
+$ docker compose -f ./traefik/compose.yaml up -d
 ```
