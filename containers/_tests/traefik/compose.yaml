@@ -1,33 +1,33 @@
 name: traefik
 services:
-    reverse-proxy:
-        image: traefik:v3.2
-        container_name: traefik-reverse-proxy
-        restart: unless-stopped
-        command:
-            - --providers.docker=true
-            - --providers.docker.exposedByDefault=false
-            - --providers.docker.network=reverse_proxy
-            - --entryPoints.web.address=:80
-            - --api.dashboard=true
-        ports:
-            - 80:80 # HTTP
-            # - 443:443 # HTTP
-            # - 8080:8080 # Web UI (with --api.insecure=true)
-        volumes:
-            - /var/run/docker.sock:/var/run/docker.sock:ro
-        networks:
-            - reverse_proxy
-        labels:
-            - traefik.enable=true
-            - traefik.http.routers.dashboard.rule=Host(`local.lab`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
-            - traefik.http.routers.dashboard.entrypoints=web
-            - traefik.http.routers.dashboard.service=api@internal
-            - traefik.http.middlewares.dashboard-strip-slash.redirectregex.regex=(^.*\/dashboard$$)
-            - traefik.http.middlewares.dashboard-strip-slash.redirectregex.replacement=$$1/
-            - traefik.http.middlewares.dashboard-strip-slash.redirectregex.permanent=false
-            - traefik.http.routers.dashboard.middlewares=dashboard-strip-slash
+  reverse-proxy:
+    image: docker.io/traefik:v3.2
+    container_name: traefik-reverse-proxy
+    restart: unless-stopped
+    command:
+      - --providers.docker=true
+      - --providers.docker.exposedByDefault=false
+      - --providers.docker.network=reverse_proxy
+      - --entryPoints.web.address=:80
+      - --api.dashboard=true
+    ports:
+      - 80:80 # HTTP
+      # - 443:443 # HTTPS
+      # - 8080:8080 # Web UI (with --api.insecure=true)
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - reverse_proxy
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.dashboard.rule=Host(`local.lab`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
+      - traefik.http.routers.dashboard.entrypoints=web
+      - traefik.http.routers.dashboard.service=api@internal
+      - traefik.http.middlewares.dashboard-strip-slash.redirectregex.regex=(^.*\/dashboard$$)
+      - traefik.http.middlewares.dashboard-strip-slash.redirectregex.replacement=$$1/
+      - traefik.http.middlewares.dashboard-strip-slash.redirectregex.permanent=false
+      - traefik.http.routers.dashboard.middlewares=dashboard-strip-slash
 
 networks:
-    reverse_proxy:
-        external: true
+  reverse_proxy:
+    external: true
