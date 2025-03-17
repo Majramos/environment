@@ -1,0 +1,23 @@
+name: reverse_proxy_caddy
+services:
+  caddy:
+    image: caddy:alpine
+    container_name: reverse_proxy_caddy
+    restart: unless-stopped
+    ports:
+      - 8080:80
+      # - 443:443
+    networks:
+      - reverse_proxy
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:z
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+  caddy_config:
+
+networks:
+  reverse_proxy:
+    name: reverse_proxy_caddy
