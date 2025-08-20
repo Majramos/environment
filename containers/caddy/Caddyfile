@@ -1,0 +1,12 @@
+{
+    auto_https off
+}
+
+local.lab:80 {
+
+    redir /portainer /portainer/
+    handle_path /portainer/* {
+        reverse_proxy portainer:9000
+    }
+
+}
