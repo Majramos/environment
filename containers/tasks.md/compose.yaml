@@ -1,20 +1,20 @@
 name: tasks.md
 services:
-    tasks.md:
-        image: baldissaramatheus/tasks.md
-        container_name: tasks.md
-        environment:
-            - PUID=1000
-            - PGID=1000
-        volumes:
-            - ./data/tasks:/tasks
-            - ./data/config:/config
-        restart: unless-stopped
-        # ports:
-            # - ${TASKS_HTTP_PORT}:8080
-        networks:
-            - reverse_proxy
+  tasks.md:
+    image: docker.io/baldissaramatheus/tasks.md
+    container_name: tasks.md
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - ./data/tasks:/tasks
+      - ./data/config:/config
+    restart: unless-stopped
+    # ports:
+    # - ${TASKS_HTTP_PORT}:8080
+    networks:
+      - reverse_proxy
 
 networks:
-    reverse_proxy:
-        external: true
+  reverse_proxy:
+    external: true
