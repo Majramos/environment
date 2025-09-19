@@ -138,3 +138,7 @@ containers/uptime/data/*
 # actualbudget
 containers/actualbudget/data/*
 !containers/actualbudget/data/.gitkeep
+
+# tandoor
+containers/tandoor/data/*
+!containers/tandoor/data/mediafiles/.gitkeep
