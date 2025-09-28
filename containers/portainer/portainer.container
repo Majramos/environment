@@ -1,0 +1,19 @@
+[Unit]
+Description=Portainer Quadlet - container management
+
+[Container]
+ContainerName=portainer-quadlet
+Image=docker.io/portainer/portainer-ce:2.21.4
+PodmanArgs=--privileged
+Exec=-H unix:///var/run/docker.sock --base-url="/portainer" --http-enabled
+PublishPort=9000:9000
+Volume=/opt/containers/portainer/data:/data:Z
+Volume=/run/user/1000/podman/podman.sock:/var/run/docker.sock:Z
+Network=reverse_proxy_caddy.network
+
+[Service]
+Restart=always
+TimeoutStartSec=900
+
+[Install]
+WantedBy=multi-user.target default.target
