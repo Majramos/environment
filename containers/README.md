@@ -1,12 +1,21 @@
 # Containers used in selfhost
 
 ## Services
+
+### restart podman
+- https://linuxhandbook.com/autostart-podman-containers/
+- https://qubitsandbytes.co.uk/containers/running-podman-pods-and-containers-on-boot/
+```bash
+mkdir -p ~/.config/systemd/user
+```
+
 ### network
 create a network to connect all containers and use a reverse proxy
 
 ```bash
 $ docker network create reverse_proxy
 ```
+
 
 add `127.0.0.1 local.lab` to hosts file
 
@@ -20,18 +29,36 @@ reverse proxy
 Site:
 - https://caddyserver.com/
 
-
 Documentation on docker instalation:
 - https://linuxiac.com/how-to-set-up-caddy-as-reverse-proxy/#h-set-up-caddy-as-a-reverse-proxy-in-a-docker-container
+- https://linuxconfig.org/how-to-bind-a-rootless-container-to-a-privileged-port-on-linux
+- https://serverfault.com/questions/1004701/firewall-cmd-not-allowing-loopback-redirect/1004742#1004742
+- https://linuxhandbook.com/firewalld-cmd/
 
+#### fix for `cannot expose privileged port 80`
+with --permanent, to make it permanent
 ```bash
-$ docker compose -f .\caddy\compose.yaml up -d
+$ sudo firewall-cmd --direct --add-rule ipv4 nat OUTPUT 0 -p tcp --dport=80 -o lo -j REDIRECT --to-port=8080
+$ sudo firewall-cmd --reload
 ```
 
+```bash
+$ docker compose -f $PWD/caddy/compose.yaml up -d
+```
+enter container in root mode
+```bash
+$ podman exec -it -u root reverse_proxy_caddy sh
+```
 reload caddy config
 ```bash
 $ caddy reload --config /etc/caddy/Caddyfile
 ```
+
+#### autostart on boot
+```bash
+$ podman generate systemd --new --name reverse_proxy_caddy
+```
+
 
 ### Portainer
 container management
@@ -41,10 +68,24 @@ Site:
 
 Documentation on docker instalation:
 - https://docs.portainer.io/start/install-ce/server/docker/linux
+- https://linuxtldr.com/deploy-portainer-on-podman/#Step_22_Deploying_the_Portainer_Server_on_Podman_without_Root
 
+fix for podman, enable for rootless
 ```bash
-$ docker compose -f .\portainer\compose.yaml up -d
+$ systemctl --user enable --now podman.socket
 ```
+run container
+```bash
+$ podman compose --podman-run-args='--security-opt label=disable' up
+# or
+$ podman compose --podman-run-args='--privileged' up
+# $ docker compose -f $PWD/portainer/compose.yaml up -d
+```
+
+#### enable start of system services, even if not logged in
+```bash
+sudo loginctl enable-linger $USER
+``
 
 ### SearXNG
 meta-search engine
@@ -76,7 +117,7 @@ Documentation on docker instalation:
 $ docker compose -f .\it-tools\compose.yaml up -d
 ```
 
-### Stirling-Tools
+### Stirling-PDF
 general tools
 
 Site:
@@ -130,5 +171,10 @@ Site:
 - https://actualbudget.org/
 
 ```bash
-$ docker compose -f .\actualbudget\compose.yaml up -d
+$ docker compose -f ./actualbudget/compose.yaml up -d
+```
+
+## Utilities
+```console
+$ podman inspect <container name> --format '{{ .State.Status }}'
 ```
