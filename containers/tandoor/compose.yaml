@@ -3,7 +3,7 @@ services:
     image: docker.io/postgres:16-alpine
     restart: always
     volumes:
-      - ./data/postgresql:/var/lib/postgresql/data:Z
+      - ./tandoor/data/postgresql:/var/lib/postgresql/data:Z
     env_file:
       - ./.env
 
@@ -16,10 +16,10 @@ services:
       - ./.env
     volumes:
       # Do not make this a bind mount, see https://docs.tandoor.dev/install/docker/#volumes-vs-bind-mounts
-      - staticfiles:/opt/recipes/staticfiles
-      - ./data/mediafiles:/opt/recipes/mediafiles:z
+      - tandoor_staticfiles:/opt/recipes/staticfiles
+      - ./tandoor/data/mediafiles:/opt/recipes/mediafiles:z
     depends_on:
       - tandoor_db
 
 volumes:
-  staticfiles:
+  tandoor_staticfiles:

@@ -1,24 +1,24 @@
 name: stirling-pdf
 services:
-    stirling-pdf:
-        image: stirlingtools/stirling-pdf:latest
-        container_name: stirling-pdf
-        # ports:
-            # - ${PDF_HTTP_PORT}:8080
-        networks:
-            - reverse_proxy
-        volumes:
-            - ./data/trainingData:/usr/share/tessdata # Required for extra OCR languages
-            - ./data/extraConfigs:/configs
-            # - ./data/customFiles:/customFiles/
-            # - ./data/logs:/logs/
-        restart: unless-stopped
-        environment:
-            - DOCKER_ENABLE_SECURITY=true
-            - INSTALL_BOOK_AND_ADVANCED_HTML_OPS=false
-            - LANGS=en_GB
-            - SYSTEM_ROOTURIPATH=/pdf
+  stirling-pdf:
+    image: docker.io/stirlingtools/stirling-pdf:latest
+    container_name: stirling-pdf
+    # ports:
+    # - ${PDF_HTTP_PORT}:8080
+    networks:
+      - reverse_proxy
+    volumes:
+      - ./data/trainingData:/usr/share/tessdata # Required for extra OCR languages
+      - ./data/extraConfigs:/configs
+      # - ./data/customFiles:/customFiles/
+      # - ./data/logs:/logs/
+    restart: unless-stopped
+    environment:
+      - DOCKER_ENABLE_SECURITY=true
+      - INSTALL_BOOK_AND_ADVANCED_HTML_OPS=false
+      - LANGS=en_GB
+      - SYSTEM_ROOTURIPATH=/pdf
 
 networks:
-    reverse_proxy:
-        external: true
+  reverse_proxy:
+    external: true
